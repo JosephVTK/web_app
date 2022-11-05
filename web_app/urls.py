@@ -24,7 +24,8 @@ from django.views.generic import TemplateView
 import web_app.config.admin
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='hello_world.html')),
+    path('', TemplateView.as_view(template_name='base.html')),
+    path('mymodels/', include('core_app.urls')),
     path('admin/', admin.site.urls)
 ]
 

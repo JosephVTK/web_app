@@ -142,3 +142,5 @@ geckodriver
 
 #
 *.data.txt
+static-serve/
+media-serve/

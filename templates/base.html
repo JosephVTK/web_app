@@ -30,8 +30,10 @@
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
         <header class="mb-auto">
             <div>
+                <a href="{% url 'admin:index' %}">Admin</a>
             </div>
           </header>
+        {% block content %}
         <main class="px-3 my-auto">
             <h1>Cover your page.</h1>
             <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit
@@ -40,6 +42,7 @@
                 <a href="#" class="btn btn-lg btn-secondary fw-bold border-white bg-white text-dark">Learn more</a>
             </p>
         </main>
+        {% endblock %}
 
         <footer class="mt-auto text-white-50">
             <p>New Site Design...</p>
