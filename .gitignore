@@ -140,6 +140,10 @@ GitHub.sublime-settings
 msedgedriver.exe
 geckodriver
 
+# Migrations
+*/migrations/*.*
+!*/migrations/__init__.py
+
 #
 *.data.txt
 static-serve/

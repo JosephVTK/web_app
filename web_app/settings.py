@@ -50,6 +50,7 @@ THIRD_PARTY_APPS = [
 ]
 
 MY_APPS = [
+    'account.apps.AccountConfig',
     'core_app.apps.CoreAppConfig',
 ]
 
@@ -134,6 +135,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+AUTH_USER_MODEL = 'account.User'
 
 ADMIN_SITE_HEADER = os.getenv('ADMIN_SITE_HEADER')
 ADMIN_SITE_TITLE = os.getenv('ADMIN_SITE_TITLE')
