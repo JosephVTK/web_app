@@ -26,6 +26,7 @@ import web_app.config.admin
 urlpatterns = [
     path('', TemplateView.as_view(template_name='base.html')),
     path('mymodels/', include('core_app.urls')),
+    path('accounts/', include('account.urls')),
     path('admin/', admin.site.urls)
 ]
 

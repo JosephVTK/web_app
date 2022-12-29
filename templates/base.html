@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Your New Website</title>
-    <meta name="description" content="">
+    <title>{% block title %}Your New Website{% endblock %}</title>
+    <meta name="description" content="{% block description %}Your New Website{% endblock %}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta property="og:title" content="">
@@ -30,7 +30,16 @@
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
         <header class="mb-auto">
             <div>
-                <a href="{% url 'admin:index' %}">Admin</a>
+                {% if user.is_authenticated %}
+                    {% if user.is_superuser %}
+                        <a href="{% url 'admin:index' %}">Admin</a>
+                    {% endif %}
+                    <a href="{% url 'account_password_change' %}">Change Password</a>
+                    <a href="{% url 'account_logout' %}">Log Out</a>
+                    {% else %}
+                    <a href="{% url 'account_create' %}">Register</a>
+                    <a href="{% url 'account_login' %}">Log In</a>
+                {% endif %}
             </div>
           </header>
         {% block content %}

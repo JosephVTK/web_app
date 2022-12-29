@@ -136,7 +136,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'account.User'
+if "account.apps.AccountConfig" in MY_APPS:
+    from account.settings import *
+    AUTH_USER_MODEL = 'account.User'
+
+LOGIN_REDIRECT_URL = "account_profile"
 
 ADMIN_SITE_HEADER = os.getenv('ADMIN_SITE_HEADER')
 ADMIN_SITE_TITLE = os.getenv('ADMIN_SITE_TITLE')
@@ -176,3 +180,6 @@ INTERNAL_IPS = [
     "127.0.0.1",
     # ...
 ]
+
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = 'account/tmp/emails' # change this to a proper location
