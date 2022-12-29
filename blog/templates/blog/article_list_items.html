@@ -1,0 +1,27 @@
+{% for article in object_list %}
+<div class="container border rounded shadow text-start markdown-content-list mb-3">
+    <div class="row justify-content-between">
+        <div class="col-8 col-sm-4 text-start">
+            <div>
+                <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+                {% for tag in article.tags.all %}
+                <a class="btn btn-sm btn-primary px-1 py-0" href="{{ tag.get_absolute_url }}">
+                    {{ tag }}
+                </a>
+                {% endfor %}
+            </div>
+            <div>
+                {{ article.content | truncatewords:14 }}
+            </div>
+        </div>
+        <div class="col-4 col-sm-4 text-end">
+            <div>
+                {{ article.date_created }}
+            </div>
+            <div>
+                By {{ article.author }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}

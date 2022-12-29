@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load markdown_extras %}
+{% load static %}
+
+{% block title %}
+{{ object.title }}
+{% endblock %}
+
+{% block head_content %}
+<link rel="stylesheet" href="{% static 'css/markdown.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto">
+    <div class="text-start">
+        <h2 class="display-4">{{ object.title }}</h2>
+        {% if user.pk == object.author.pk %}
+            <p class="fs-6 my-0"><a href="{% url 'admin:blog_article_change' article.id %}">Admin</a></p>
+        {% endif %}
+        <p class="fs-6 my-0">Authored by {{ object.author }}</p>
+        <p class="fs-6 my-0">Created On: {{ object.date_created }}</p>
+        <p class="fs-6 my-0">
+            {% for tag in article.tags.all %}
+            <a class="btn btn-sm btn-primary px-1 py-0" href="{{ tag.get_absolute_url }}">
+                {{ tag }}
+            </a>
+            {% endfor %}
+        </p>
+
+        <div class="my-2 markdown-content">
+            {{ object.content | markdown | safe }}
+        </div>
+    </div>
+    
+</div>
+{% endblock %}

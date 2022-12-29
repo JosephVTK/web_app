@@ -20,14 +20,24 @@ from django.conf.urls.static import static
 
 from django.views.generic import TemplateView
 
+from rest_framework.routers import DefaultRouter
+
 # Load the Admin File Here
 import web_app.config.admin
+
+from blog.views import ArticleViewSet
+
+router = DefaultRouter()
+
+router.register(r'articles', ArticleViewSet)
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='base.html')),
     path('mymodels/', include('core_app.urls')),
     path('accounts/', include('account.urls')),
-    path('admin/', admin.site.urls)
+    path('admin/', admin.site.urls),
+    path('blog/', include('blog.urls')), 
+    path('__api__/', include(router.urls))
 ]
 
 if settings.DEBUG is True:

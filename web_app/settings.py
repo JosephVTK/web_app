@@ -33,7 +33,6 @@ DEBUG = os.getenv('DEBUG', 'False') == "True"
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',')
 
 # Application definition
-
 OEM_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -51,6 +50,9 @@ THIRD_PARTY_APPS = [
 
 MY_APPS = [
     'account.apps.AccountConfig',
+
+    'blog.apps.BlogConfig',
+
     'core_app.apps.CoreAppConfig',
 ]
 
@@ -68,6 +70,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'web_app.urls'
+
+if "account.apps.AccountConfig" in MY_APPS:
+    from account.settings import *
+    AUTH_USER_MODEL = 'account.User'
+
 
 TEMPLATES = [
     {
@@ -135,10 +142,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-if "account.apps.AccountConfig" in MY_APPS:
-    from account.settings import *
-    AUTH_USER_MODEL = 'account.User'
 
 LOGIN_REDIRECT_URL = "account_profile"
 

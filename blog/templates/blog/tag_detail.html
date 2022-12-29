@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ object.identifier }}
+{% endblock %}
+
+
+{% block content %}
+<div class="container mx-auto">
+    {% include "blog/article_list_items.html" with object_list=object.articles.all %}
+</div>
+{% endblock %}
