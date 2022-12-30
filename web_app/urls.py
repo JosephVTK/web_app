@@ -17,29 +17,50 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-
+from django.contrib.sitemaps.views import sitemap
 from django.views.generic import TemplateView
 
 from rest_framework.routers import DefaultRouter
 
-# Load the Admin File Here
-import web_app.config.admin
+from .robots import RobotsView
 
 from blog.views import ArticleViewSet
+from blog.sitemaps import ArticleSitemap
 
-router = DefaultRouter()
-
-router.register(r'articles', ArticleViewSet)
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='base.html')),
+    path('', TemplateView.as_view(template_name='base.html'), name='index_page'),
     path('mymodels/', include('core_app.urls')),
     path('accounts/', include('account.urls')),
+    path('blog/', include('blog.urls')),
+    path('document/', include('document.urls')),
     path('admin/', admin.site.urls),
-    path('blog/', include('blog.urls')), 
-    path('__api__/', include(router.urls))
 ]
+
+if settings.USE_API is True:
+    router = DefaultRouter()
+    router.register(r'articles', ArticleViewSet)
+
+    urlpatterns.append(
+        path('__api__/', include(router.urls))
+    )
+
+if settings.USE_SITEMAPS is True:
+    urlpatterns.append(
+    path('sitemap.xml', sitemap, 
+    {'sitemaps': 
+        { 'articles' : ArticleSitemap }
+    }, name='django.contrib.sitemaps.views.sitemap')
+    )
+
+if settings.USE_ROBOTS is True:
+    urlpatterns.append(
+        path("robots.txt", RobotsView.as_view()),
+    )
 
 if settings.DEBUG is True:
     urlpatterns += [path('__debug__/', include('debug_toolbar.urls'))]
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# Load the Admin File Here
+import web_app.config.admin

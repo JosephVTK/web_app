@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}
+Upload Document
+{% endblock %}
+
+{% block content %}
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+
+
+<h4>Recent...</h4>
+<div class="container d-flex flex-wrap justify-content-center gap-3">
+    {% for doc in user.documents.recent %}
+    <div>
+        <a href="{{ doc.file.url }}">
+            {% if doc.is_image %}
+            <div>
+                <img class="img img-fluid display-1" src="{{ doc.file.url }}" alt="" style="width: auto; height: auto; max-width: 100px; max-height: 100px;">
+                <div>{{ doc.get_file_name }}</div>
+            </div>
+            {% else %}
+            <div>
+                <i class="bi bi-file-earmark-text-fill display-1 text-center" style="width: auto; height: auto; max-width: 100px; max-height: 100px;"></i>
+                <div>{{ doc.get_file_name }}</div>
+            </div>
+            
+            {% endif %}
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

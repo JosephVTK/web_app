@@ -40,6 +40,8 @@ OEM_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.sitemaps'
 ]
 
 THIRD_PARTY_APPS = [
@@ -50,9 +52,8 @@ THIRD_PARTY_APPS = [
 
 MY_APPS = [
     'account.apps.AccountConfig',
-
     'blog.apps.BlogConfig',
-
+    'document.apps.DocumentConfig',
     'core_app.apps.CoreAppConfig',
 ]
 
@@ -186,3 +187,10 @@ INTERNAL_IPS = [
 
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = 'account/tmp/emails' # change this to a proper location
+
+USE_API = True
+USE_SITEMAPS = True
+USE_ROBOTS = True
+
+# Sites Framework
+SITE_ID = 1

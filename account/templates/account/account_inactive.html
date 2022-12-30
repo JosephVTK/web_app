@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Account is inactive.</h1>
+<p class="fs-6 text-warning"><a href="{% url 'account_two_factor_authenticate' %}?username={{ user.username }}">Click Here</a> to reissue token.</p>
+{% endblock %}

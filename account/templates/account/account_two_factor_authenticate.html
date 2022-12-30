@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Account requires authentication.</h1>
+{% if expired %}
+<p class="fs-6 text-danger">
+    Authentication token expired. {{ token.expiry }} &lt; {{ now }}
+</p>
+{% elif authenticated %}
+<p class="fs-6 text-success">
+    Authenticated!
+</p>
+{% elif reissued %}
+<p class="fs-6 text-success">
+    Reissueing Token!
+</p>
+{% endif %}
+{% endblock %}
