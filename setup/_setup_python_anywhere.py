@@ -46,7 +46,7 @@ def handle(*args):
     template, username, host, port, password, database, new = args
 
     if not host:
-        host = f"https://{username}.pythonanywhere.com,127.0.0.1"
+        host = f"{username}.pythonanywhere.com,127.0.0.1"
 
     if not database:
         database = 'sqlite'

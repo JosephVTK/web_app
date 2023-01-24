@@ -62,7 +62,7 @@ class AccountLogicTest(TestCase):
             }
         )
         self.assertEquals(response.status_code, 302)
-        self.assertEquals(response.url, reverse('account_profile'))
+        self.assertEquals(response.url, reverse('profile_detail'))
 
 
         #client.login(username='admin', password=password)

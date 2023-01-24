@@ -17,8 +17,8 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 if not os.getenv('LOAD_ENV', 'False') == "True":
-        print ("Please create .env file first.")
-        raise FileNotFoundError('No .env file found.')
+    print("Please create .env file first.")
+    raise FileNotFoundError('No .env file found.')
 
 
 # Quick-start development settings - unsuitable for production
@@ -52,6 +52,7 @@ THIRD_PARTY_APPS = [
 
 MY_APPS = [
     'account.apps.AccountConfig',
+    'user_profile.apps.UserProfileConfig',
     'blog.apps.BlogConfig',
     'document.apps.DocumentConfig',
     'core_app.apps.CoreAppConfig',
@@ -80,7 +81,7 @@ if "account.apps.AccountConfig" in MY_APPS:
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -100,10 +101,10 @@ USING_DB = os.getenv('USING_DB', 'sqlite')
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 if USING_DB == 'mysql':
-    MYSQL_NAME=os.getenv('MYSQL_NAME')
-    MYSQL_USER=os.getenv('MYSQL_USER')
-    MYSQL_PASSWORD=os.getenv('MYSQL_PASSWORD')
-    MYSQL_HOST=os.getenv('MYSQL_HOST')
+    MYSQL_NAME = os.getenv('MYSQL_NAME')
+    MYSQL_USER = os.getenv('MYSQL_USER')
+    MYSQL_PASSWORD = os.getenv('MYSQL_PASSWORD')
+    MYSQL_HOST = os.getenv('MYSQL_HOST')
 
     DATABASES = {
         'default': {
@@ -123,7 +124,7 @@ else:
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         }
-    } 
+    }
 
 
 # Password validation
@@ -144,7 +145,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LOGIN_REDIRECT_URL = "account_profile"
+LOGIN_REDIRECT_URL = "profile_detail"
 
 ADMIN_SITE_HEADER = os.getenv('ADMIN_SITE_HEADER')
 ADMIN_SITE_TITLE = os.getenv('ADMIN_SITE_TITLE')
@@ -186,7 +187,7 @@ INTERNAL_IPS = [
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_FILE_PATH = 'account/tmp/emails' # change this to a proper location
+EMAIL_FILE_PATH = 'account/tmp/emails'  # change this to a proper location
 
 USE_API = True
 USE_SITEMAPS = True

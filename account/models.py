@@ -40,6 +40,9 @@ class User(AbstractUser):
                 fail_silently=True
             )
 
+    def __str__(self) -> str:
+        return self.username
+
 class TwoFactorToken(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     token = models.UUIDField(default=uuid.uuid4, editable=False)

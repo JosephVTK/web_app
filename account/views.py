@@ -25,7 +25,7 @@ class AccountCreateView(CreateView):
     model = User
     form_class = RegistrationForm
     template_name = 'account/account_create.html'
-    success_url = reverse_lazy('account_profile')
+    success_url = reverse_lazy('profile_detail')
 
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -46,7 +46,7 @@ class AccountChangeView(FormView):
     model = User
     form_class = UserEditForm
     template_name = 'account/account_create.html'
-    success_url = reverse_lazy('account_profile')
+    success_url = reverse_lazy('profile_detail')
 
 
 class AccountProfileView(LoginRequiredMixin, TemplateView):
