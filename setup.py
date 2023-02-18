@@ -27,72 +27,46 @@ env_template ={
     "ADMIN_SITE_INDEX_TITLE" : "The Control Console",
 }
 
+def gather_input(input_str, default=None, options=None):
+    while True:
+        if options != None:
+            print (f'Options = [{str(options)}]')
+        if default != None:
+            print (f'Default = [{str(default)}]')
+        g_input = input(input_str + " > ").strip()
+
+        if g_input == '':
+            if default is not None:
+                g_input = default
+            else:
+                print ("-- Not valid input.")
+                continue
+
+        if options and g_input not in options:
+            print ("-- Not a valid option")
+            continue
+
+        result = input(f"Is [{g_input}] correct? (y/n)").strip().lower()
+
+        if result in ['', 'y']:
+            if result == '' and default == None:
+                continue
+            break
+
+    return g_input
+
 if __name__ == '__main__':
     # Remove 1st argument from the
     # list of command line arguments
     argumentList = sys.argv[1:]
 
-    # Options
-    options = ""
+    username = gather_input('What is your username?', '')
+    host = gather_input('Host Name?', '')
+    port = gather_input('Port?', '')
+    password = gather_input('Password?', '')
+    database = gather_input('Database?', 'sqlite', ['sqlite', 'mysql', 'postgres'])
+    new = False if gather_input('Overwrite existing database?', 'false', ['true', 'false']) == 'false' else True
 
-    # Long options
-    long_options = ["help", "username=", "host=", "db=", "port=", 'new']
-
-    try:
-        # Parsing argument
-        arguments, values = getopt.getopt(argumentList, options, long_options)
-
-        username = None
-        host = None
-        port = None
-        password = None
-        database = None
-        new = False
-
-        # checking each argument
-        for key, val in arguments:
-            key = key.lower()
-
-            if key in ("-h", "--help"):
-                print("""Options:
-                --username > ['Username'] REQUIRED
-                --host > ['localhost']
-                --port > ['8000']
-                --db > ['sqlite', 'mysql']
-
-                --new : Will over-write existing environment file.
-                """)
-
-            elif key in ("--username"):
-                username = val
-
-            elif key in ("--host"):
-                host = val
-
-            elif key in ("--port"):
-                if val.isdigit() == False:
-                    raise getopt.GetoptError('Port must be numerical.')
-                port = val
-
-            elif key in ("--db"):
-                print(f"Enabling special output mode {val}")
-
-                if val not in ['sqlite', 'mysql']:
-                    raise getopt.GetoptError(
-                        'Database choices are [sqlite, mysql]')
-
-                database = val
-
-            elif key in ("--new"):
-                new = True
-
-        if not username:
-            raise getopt.GetoptError('Username required.\n See Help > --help.')
-
-    except getopt.error as err:
-        # output error, and return with an error code
-        print(str(err))
-        sys.exit()
 
     setup_options = {
         1 : ('Python Anywhere', _setup_python_anywhere.handle )
