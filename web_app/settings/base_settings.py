@@ -12,4 +12,3 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG', 'False') == "True"
 ROOT_URLCONF = 'web_app.urls'
 WSGI_APPLICATION = 'web_app.wsgi.application'
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

@@ -4,6 +4,8 @@ from .base_settings import BASE_DIR
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 # Configuration Settings
 USING_DB = os.getenv('USING_DB', 'sqlite')
 

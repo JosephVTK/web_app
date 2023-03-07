@@ -25,8 +25,8 @@ APP_INDEX = (
     ('core_app.apps.CoreAppConfig',           True,        True,        True,        None),
 )
 
-INSTALLED_APPS = [ app for app, production, development, enabled, _ in APP_INDEX if (enabled and (DEBUG is False and production == True) or (DEBUG is True and development == True)) ]
+INSTALLED_APPS = [ app for app, production, development, enabled, _ in APP_INDEX if (enabled and ((DEBUG is False and production == True) or (DEBUG is True and development == True))) ]
 
-for app in APP_INDEX:
-    if app[4] is not None:
-        locals().update({ key : val for key, val in import_module(app[4]).__dict__.items() if not key.startswith('_') })
+for _, _, _, _, settings in APP_INDEX:
+    if settings is not None:
+        locals().update({ key : val for key, val in import_module(settings).__dict__.items() if not key.startswith('_') })
