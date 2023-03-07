@@ -21,7 +21,7 @@ urlpatterns = [
     path('password/__reset__/<str:uidb64>/<str:token>/', AccountPasswordResetConfirmView.as_view(), name='password_reset_confirm'),
 ]
 
-if 'user_profile.apps.UserProfileConfig' in settings.MY_APPS:
+if 'user_profile.apps.UserProfileConfig' in settings.INSTALLED_APPS:
     urlpatterns += [
         path('profile/', include('user_profile.urls'))
     ]
