@@ -209,8 +209,9 @@ STATIC_URL = 'static/'
 MEDIA_URL = 'media/'
 
 FILE_ROOT = os.getenv('FILE_ROOT', BASE_DIR)
-STATIC_ROOT = os.path.join(FILE_ROOT, 'static/')
-MEDIA_ROOT = os.path.join(FILE_ROOT, 'media/')
+
+STATIC_ROOT = os.path.join(FILE_ROOT, 'static-files/static/')
+MEDIA_ROOT = os.path.join(FILE_ROOT, 'static-files/media/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -232,3 +233,10 @@ USE_ROBOTS = True
 
 # Sites Framework
 SITE_ID = 1
+
+# Account Settings
+ACCOUNT_LOGIN_UPON_REGISTRATION = True
+
+ACCOUNT_2FA = False
+ACCOUNT_2FA_TEXT = False
+ACCOUNT_2FA_EMAIL = True

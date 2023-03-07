@@ -1,8 +1,45 @@
 {% extends 'base.html' %}
+{% load account_tags %}
 {% block content %}
-<form method="post">
+<form method="post" class="h-100 container text-start">
     {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Register">
+    <div class="row">
+        <div class="col-12">
+            {{ form.errors }}
+        </div>
+        <div class="col-12">
+            {{ form.username.errors }}
+            {{ form.username.label_tag|add_class:"form-label"}}
+            {{ form.username|add_class:"form-control" }}
+        </div>
+        <div class="col-12">
+            {{ form.email.errors }}
+            {{ form.email.label_tag|add_class:"form-label"}}
+            {{ form.email|add_class:"form-control" }}
+        </div>
+        <div class="col-12">
+            {{ form.password1.errors }}
+            {{ form.password1.label_tag|add_class:"form-label"}}
+            {{ form.password1|add_class:"form-control" }}
+        </div>
+        <div class="col-12">
+            {{ form.password2.errors }}
+            {{ form.password2.label_tag|add_class:"form-label"}}
+            {{ form.password2|add_class:"form-control" }}
+        </div>
+    </div>
+    <div class="row justify-content-end">
+        <div class="col-12 col-sm-4 text-end">
+            <input type="submit" value="submit">
+        </div>
+    </div>
+    <div class="row">
+        <col-12>
+            <p class="fs6"><a href="{% url 'account_password_reset' %}">Forgot Password?</a></p>
+        </col-12>
+    </div>
+    </div>
+
+
 </form>
 {% endblock %}

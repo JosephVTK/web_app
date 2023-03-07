@@ -1,20 +1,16 @@
 {% extends 'base.html' %}
-{% load markdown_extras %}
 {% load static %}
 
 {% block title %}
 {{ object.username }}
 {% endblock %}
 
-{% block head_content %}
-<link rel="stylesheet" href="{% static 'css/markdown.css' %}">
-{% endblock %}
-
 {% block content %}
 <div class="container mx-auto">
     <div class="row">
         <div class="col-4 col-sm-12">
-            <img class="img-fluid rounded-circle border shadow border-danger" src="{{ object.avatar.url }}" alt="" srcset="">
+            <img class="img-fluid rounded-circle border shadow border-danger" src="{% if object.avatar %}{{ object.avatar.url }}{% else %}{% static 'images/missing_profile_pic.jpeg' %}{% endif %}" alt=""
+                srcset="">
         </div>
         <div class="col-8 col-sm-12">
 

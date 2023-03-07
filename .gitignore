@@ -144,6 +144,9 @@ geckodriver
 */migrations/*.*
 !*/migrations/__init__.py
 
+# App Specific
+account/tmp/
+
 #
 *.data.txt
 static-serve/
