@@ -1,8 +1,15 @@
 from django.contrib import admin
 
-from .models import MyModel
+
 # Register your models here.
+
+MODEL_EXAMPLE = """
+
+from .models import MyModel
+
 class MyModelAdmin(admin.ModelAdmin):
     pass
 
 admin.site.register(MyModel, MyModelAdmin)
+
+"""

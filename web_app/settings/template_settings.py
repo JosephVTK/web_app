@@ -1,5 +1,5 @@
 import os
-from .base_settings import BASE_DIR
+from .operations import BASE_DIR
 
 TEMPLATES = [
     {

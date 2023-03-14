@@ -33,7 +33,7 @@ def host_config():
 
                 if new_host == "!":
                     hosts.remove(host)
-                    host_settings['Host Settings']['ALLOWED_HOSTS'] = ",".join(hosts)
+                    host_settings['Host Settings']['ALLOWED_HOSTS'] = ",".join(hosts) if hosts else ""
                 else:
                     hosts.remove(host)
                     hosts.append(new_host)
@@ -56,7 +56,7 @@ def host_config():
 
                 if new_ip == "!":
                     ip_addresses.remove(ip_address)
-                    host_settings['Host Settings']['INTERNAL_IPS'] = ",".join(ip_addresses)
+                    host_settings['Host Settings']['INTERNAL_IPS'] = ",".join(ip_addresses) if ip_address else ""
                 else:
                     ip_addresses.remove(ip_address)
                     ip_addresses.append(new_ip)

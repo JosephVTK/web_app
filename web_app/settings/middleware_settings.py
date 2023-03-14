@@ -1,6 +1,6 @@
-import os
+from .operations import resolve
 
-DEBUG = os.getenv('DEBUG', 'False') == "True"
+DEBUG = resolve('DEBUG', default=False, var_type=bool, raise_error=True)
 
 MIDDLEWARE_INDEX = (
     # Name,                                                              Production,  Development, Enabled,     Position

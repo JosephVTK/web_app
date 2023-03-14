@@ -1,7 +1,7 @@
-import os
 from importlib import import_module
+from .operations import resolve
 
-DEBUG = os.getenv('DEBUG', 'False') == "True"
+DEBUG = resolve('DEBUG', default=False, var_type=bool, raise_error=True)
 
 APP_INDEX = (
     # Name,                                   Production,  Development, Enabled
@@ -23,9 +23,14 @@ APP_INDEX = (
     ('blog.apps.BlogConfig',                  True,        True,        True,        None),
     ('document.apps.DocumentConfig',          True,        True,        True,        None),
     ('core_app.apps.CoreAppConfig',           True,        True,        True,        None),
+    ('front_face.apps.FrontFaceConfig',       True,        True,        True,        None),
+
 )
 
 INSTALLED_APPS = [ app for app, production, development, enabled, _ in APP_INDEX if (enabled and ((DEBUG is False and production == True) or (DEBUG is True and development == True))) ]
+
+for app in INSTALLED_APPS:
+    print (f"Initializing {app.split('.')[-1]} App.")
 
 for _, _, _, _, settings in APP_INDEX:
     if settings is not None:

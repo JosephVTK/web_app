@@ -29,8 +29,11 @@ from blog.sitemaps import ArticleSitemap
 
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='base.html'), name='index_page'),
-    path('mymodels/', include('core_app.urls')),
+    path('', include('front_face.urls')),
+    #path('', TemplateView.as_view(template_name='base.html'), name='index_page'),
+
+    #path('mymodels/', include('core_app.urls')),
+    
     path('accounts/', include('account.urls')),
     path('blog/', include('blog.urls')),
     path('document/', include('document.urls')),

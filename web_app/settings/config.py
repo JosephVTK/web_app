@@ -1,11 +1,10 @@
-import os
-from .app_settings import INSTALLED_APPS
+from .operations import resolve
 
 LOGIN_REDIRECT_URL = "profile_detail"
 
-ADMIN_SITE_HEADER = os.getenv('ADMIN_SITE_HEADER')
-ADMIN_SITE_TITLE = os.getenv('ADMIN_SITE_TITLE')
-ADMIN_SITE_INDEX_TITLE = os.getenv('ADMIN_SITE_INDEX_TITLE')
+ADMIN_SITE_HEADER = resolve('ADMIN_SITE_HEADER')
+ADMIN_SITE_TITLE = resolve('ADMIN_SITE_TITLE')
+ADMIN_SITE_INDEX_TITLE = resolve('ADMIN_SITE_INDEX_TITLE')
 
 
 # Internationalization

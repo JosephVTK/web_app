@@ -150,4 +150,5 @@ account/tmp/
 #
 *.data.txt
 static-serve/
+static-files/
 media-serve/

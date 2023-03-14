@@ -1,5 +1,4 @@
-import os
-from .base_settings import BASE_DIR
+from .operations import BASE_DIR, resolve
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -7,7 +6,7 @@ from .base_settings import BASE_DIR
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Configuration Settings
-USING_DB = os.getenv('USING_DB', 'sqlite')
+USING_DB = resolve('USING_DB', default='sqlite')
 
 def get_value(value):
 	if not value:
@@ -25,25 +24,24 @@ def get_value(value):
 
 DATABASE_OPTIONS = { 
     key_value_pair.split(':')[0] : get_value(key_value_pair.split(':')[1]) 
-    for key_value_pair 
-    in os.getenv('DATABASE_OPTIONS', "").split(',')
+    for key_value_pair in resolve('DATABASE_OPTIONS', default="", var_type=list)
     if key_value_pair.find(':') != -1
     }
 
-DATABASE_NAME = os.getenv('DATABASE_NAME')
-DATABASE_USER = os.getenv('DATABASE_USER')
-DATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD')
-DATABASE_HOST = os.getenv('DATABASE_HOST')
-DATABASE_PORT = os.getenv('DATABASE_PORT', '')
+DATABASE_NAME = resolve('DATABASE_NAME')
+DATABASE_USER = resolve('DATABASE_USER')
+DATABASE_PASSWORD = resolve('DATABASE_PASSWORD')
+DATABASE_HOST = resolve('DATABASE_HOST')
+DATABASE_PORT = resolve('DATABASE_PORT', '')
 
 if USING_DB == 'sqlite':
-    DATABASE_ENGINE = os.getenv('DATABASE_ENGINE', 'django.db.backends.sqlite3')
-    DATABASE_NAME = os.getenv('DATABASE_NAME', BASE_DIR / 'db.sqlite3')
+    DATABASE_ENGINE = resolve('DATABASE_ENGINE', default='django.db.backends.sqlite3')
+    DATABASE_NAME = resolve('DATABASE_NAME', default=BASE_DIR / 'db.sqlite3')
 else:
     if USING_DB == 'mysql':
-        DATABASE_ENGINE = os.getenv('DATABASE_ENGINE', 'django.db.backends.mysql')
+        DATABASE_ENGINE = resolve('DATABASE_ENGINE', default='django.db.backends.mysql')
     elif USING_DB == 'postgres':
-        DATABASE_ENGINE = os.getenv('DATABASE_ENGINE', 'django.db.backends.postgresql_psycopg2')
+        DATABASE_ENGINE = resolve('DATABASE_ENGINE', default='django.db.backends.postgresql_psycopg2')
 
 # Safety Checks
 if not DATABASE_ENGINE:

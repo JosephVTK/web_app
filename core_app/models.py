@@ -2,6 +2,9 @@ from django.db import models
 from django.urls import reverse
 
 # Create your models here.
+
+MODEL_EXAMPLE = """
+
 class MyModel(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     name = models.CharField(max_length=64)
@@ -10,3 +13,5 @@ class MyModel(models.Model):
 
     def get_absolute_url(self):
         return reverse("mymodel_detail", kwargs={'pk': self.id})
+
+"""
