@@ -2,17 +2,29 @@ from django.http import HttpResponse
 from django.contrib.sites.models import Site
 from django.views import View
 
+ALLOWABLES = [
+    "/"
+]
 
+DISALLOWABLES = [
+    "/private/",
+    "/junk/",
+    "/__api__/",
+    "/admin/",
+]
+    
 class RobotsView(View):
     http_method_names = ['get']
     lines = [
-        "User-Agent: *",
-        "Allow: /",
-        "Disallow: /private/",
-        "Disallow: /junk/",
-        "Disallow: /__api__/",
-        "Disallow: /admin/",
+        "User-Agent: *"
     ]   
+
+    for item in ALLOWABLES:
+        lines.append(f'Allow: {item}')
+
+    for item in DISALLOWABLES:
+        lines.append(f'Disallow: {item}')
+
     lines_together = "\n".join(lines)
 
     def get_lines(self):
